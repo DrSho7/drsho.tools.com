@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dr Sho's Professional Tools</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<nav class="navbar">
+  <div class="logo" id="home-btn">Dr Sho</div>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#" class="nav-item" id="open-time-tool">Time Difference</a></li>
+    <li><a href="#" class="nav-item" id="open-random-utc-tool">Random UTC</a></li>
+    <li><a href="#" class="nav-item" id="open-contact-page">Contact Us</a></li>
+  </ul>
+</nav>
+
+<section id="home-section" class="section">
+  <h1>Welcome to Dr Sho</h1>
+  <p>Explore our handy tools below:</p>
+  <div class="home-buttons">
+    <button class="tool-action" onclick="showSection(timeTool)">Time Difference Tool</button>
+    <button class="tool-action" onclick="showSection(randomUTCTool)">Random UTC Time</button>
+    <button class="tool-action" onclick="showSection(contactPage)">Contact Us</button>
+  </div>
+</section>
+
+<section id="time-tool" class="section tool-content">
+  <h2>Time Difference Calculator</h2>
+  <div class="tool-container">
+    <input type="time" id="targetTime" />
+    <input type="date" id="targetDate" />
+    <button class="tool-action" onclick="calculateTime()">Calculate</button>
+    <button class="tool-action" onclick="copyToClipboardTime()">Copy Result</button>
+    <div class="output" id="result-time">Set your time & date</div>
+    <div class="note">If the selected time is in the past, it will use the next day automatically.</div>
+  </div>
+</section>
+
+<section id="random-utc-tool" class="section tool-content">
+  <h2>Random UTC Time Generator</h2>
+  <div class="tool-container">
+    <button class="tool-action" onclick="generateRandomTime()">Generate</button>
+    <button class="tool-action" onclick="copyToClipboardUTC()">Copy Time</button>
+    <div class="output" id="result-utc">Click "Generate" to get a random UTC time.</div>
+    <div class="note">Times are in 30-minute intervals.</div>
+  </div>
+</section>
+
+<section id="contact-page" class="section tool-content">
+  <h2>Contact Us</h2>
+  <p>We'd love to hear from you! Please fill out the form below:</p>
+  <div class="tool-container">
+    <iframe src="https://forms.gle/KoqadywZt5XPZzLR6" width="100%" height="500" style="border:none;"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Dr Sho. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

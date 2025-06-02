@@ -1,0 +1,84 @@
+// Particles
+particlesJS('particles-js', {
+  "particles": {
+    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+    "color": { "value": "#00ff99" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5 },
+    "size": { "value": 3 },
+    "line_linked": { "enable": true, "distance": 150, "color": "#00ff99", "opacity": 0.4, "width": 1 },
+    "move": { "enable": true, "speed": 2, "out_mode": "out" }
+  },
+  "interactivity": {
+    "events": { "onhover": { "enable": true, "mode": "repulse" } },
+    "modes": { "repulse": { "distance": 100 } }
+  },
+  "retina_detect": true
+});
+
+// Navigation toggle for mobile
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+menuToggle.addEventListener("click", () => navLinks.classList.toggle("active"));
+
+// Sections
+const homeBtn = document.getElementById("home-btn");
+const homeSection = document.getElementById("home-section");
+const timeTool = document.getElementById("time-tool");
+const randomUTCTool = document.getElementById("random-utc-tool");
+const contactPage = document.getElementById("contact-page");
+
+document.getElementById("open-time-tool").addEventListener("click", () => { showSection(timeTool); navLinks.classList.remove("active"); });
+document.getElementById("open-random-utc-tool").addEventListener("click", () => { showSection(randomUTCTool); navLinks.classList.remove("active"); });
+document.getElementById("open-contact-page").addEventListener("click", () => { showSection(contactPage); navLinks.classList.remove("active"); });
+homeBtn.addEventListener("click", () => showSection(homeSection));
+
+function showSection(section) {
+  [homeSection, timeTool, randomUTCTool, contactPage].forEach(s => {
+    s.style.display = "none";
+    s.classList.remove("show");
+  });
+  section.style.display = "block";
+  setTimeout(() => section.classList.add("show"), 10);
+}
+
+// Time Difference tool
+function calculateTime() {
+  const timeVal = document.getElementById("targetTime").value;
+  let dateVal = document.getElementById("targetDate").value;
+  const result = document.getElementById("result-time");
+  if (!timeVal) { result.textContent = "Please enter a valid time."; return; }
+  const now = new Date();
+  if (!dateVal) {
+    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+    dateVal = tomorrow.toISOString().split("T")[0];
+  }
+  const target = new Date(`${dateVal}T${timeVal}`);
+  if (target < now) target.setDate(target.getDate() + 1);
+  const minutes = Math.floor((target - now) / 60000);
+  result.textContent = `${minutes} minutes left`;
+}
+
+function copyToClipboardTime() {
+  const text = document.getElementById("result-time").textContent;
+  navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard!"));
+}
+
+// Random UTC tool
+function generateRandomTime() {
+  const hours = Math.floor(Math.random() * 24);
+  const minutes = Math.random() < 0.5 ? "00" : "30";
+  document.getElementById("result-utc").textContent = `${hours.toString().padStart(2, '0')}:${minutes} UTC`;
+}
+
+function copyToClipboardUTC() {
+  const text = document.getElementById("result-utc").textContent;
+  navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard!"));
+}
+
+// Initialize
+window.addEventListener("DOMContentLoaded", () => {
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("targetDate").value = today;
+  showSection(homeSection);
+});
